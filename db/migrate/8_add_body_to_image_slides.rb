@@ -1,8 +1,6 @@
-class AddBodyToImageSlides < ActiveRecord::Migration
-  def up
-    Refinery::ImageSlideshows::ImageSlide.add_translation_fields! body: :text
-  end
-  def down
-    remove_column :refinery_image_slide_translations, :body
+# frozen_string_literal: true
+class AddBodyToImageSlides < ActiveRecord::Migration[5.1]
+  def change
+    add_column :refinery_image_slide_translations, :body, :text
   end
 end

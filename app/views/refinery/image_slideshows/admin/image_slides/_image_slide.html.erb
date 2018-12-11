@@ -1,22 +1,35 @@
+<%
+  # setup params for various action links
+  edit_url = refinery.edit_image_slideshows_admin_image_slideshow_image_slide_path(@image_slideshow, image_slide)
+  delete_url = refinery.image_slideshows_admin_image_slideshow_image_slide_path(@image_slideshow, image_slide)
+  delete_options = {
+      class: "cancel confirm-delete",
+      data: {confirm: t('message',  scope: 'refinery.admin.delete', title: image_slide.title)}
+  }
+%>
 <li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(image_slide) -%>" style="background-color: #EAEAEA; margin-bottom: 10px;">
   <%= image_fu image_slide.image, '128x128', :style => 'padding: 1em 1em 0 1em;' %>
+
   <span class="preview">
     <% image_slide.translations.each do |translation| %>
       <% if translation.title.present? %>
-        <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
-            refinery.edit_image_slideshows_admin_image_slideshow_image_slide_path(@image_slideshow, image_slide, :switch_locale => translation.locale),
-            :class => 'locale' %>
+        <%= link_to refinery.edit_image_slideshows_admin_image_slideshow_image_slide_path(@image_slideshow, image_slide, :switch_locale => translation.locale),
+                    class: 'locale', title: translation.locale.upcase do %>
+
+          <div class="<%=translation.locale %> locale_marker">
+            <%= locale_text_icon(translation.locale.upcase) %>
+          </div>
         <% end %>
+      <% end %>
     <% end %>
   </span>
 
+  <%= content_tag :span, class: 'label notice' do
+    ::I18n.t('draft', :scope => 'refinery.image_slideshows.admin.image_slides.records')
+  end if image_slide.draft?  %>
+
   <span class='actions'>
-    <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_image_slideshows_admin_image_slideshow_image_slide_path(@image_slideshow, image_slide),
-         :title => t('.edit') %>
-    <%= link_to refinery_icon_tag("delete.png"), refinery.image_slideshows_admin_image_slideshow_image_slide_path(@image_slideshow, image_slide),
-        :class => "cancel confirm-delete",
-        :title => t('.delete'),
-        :confirm => t('message', :scope => 'refinery.admin.delete', :title => image_slide.title),
-        :method => :delete %>
+    <%= action_icon(:edit,    edit_url ,  t('edit',   scope: 'refinery.image_slideshows.admin.image_slides.image_slide' ) ) %>
+    <%= action_icon(:delete,  delete_url, t('delete', scope: 'refinery.image_slideshows.admin.image_slides.image_slide' ), delete_options ) %>
   </span>
 </li>

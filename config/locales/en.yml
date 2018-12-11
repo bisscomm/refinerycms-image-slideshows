@@ -14,6 +14,7 @@ en:
             title: Image Slideshows
             sorry_no_results: Sorry! There are no results found.
             no_items_yet: There are no Image Slideshows yet. Click "Add New Image Slideshow" to add your first image slideshow.
+            draft: Draft
           image_slideshow:
             view_live_html: View this image slideshow live <br/><em>(opens in a new window)</em>
             edit: Edit this image slideshow
@@ -34,6 +35,7 @@ en:
             title: Image Slides
             sorry_no_results: Sorry! There are no results found.
             no_items_yet: There are no Image Slides yet. Click "Add New Image Slide" to add your first image slide.
+            draft: Draft
           image_slide:
             view_live_html: View this image slide live <br/><em>(opens in a new window)</em>
             edit: Edit this image slide
@@ -41,12 +43,14 @@ en:
   activerecord:
     attributes:
       refinery/image_slideshows/image_slide:
+        draft: Draft
         title: Title
         image: Image
         caption: Caption
         link_url: Link
         body: Text body
       refinery/image_slideshows/image_slideshow:
+        draft: Draft
         title: Title
         height: Height
         width: Width

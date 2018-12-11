@@ -1,10 +1,12 @@
+<% delete_url = @image_slide.id ? refinery.image_slideshows_admin_image_slideshow_image_slide_path(@image_slideshow, @image_slide) : nil %>
+
 <%= form_for [refinery, :image_slideshows_admin, @image_slideshow, @image_slide] do |f| %>
   <%= render '/refinery/admin/error_messages',
               :object => @image_slide,
               :include_object_name => true %>
 
   <%= render '/refinery/admin/locale_picker',
-              :current_locale => Globalize.locale %>
+              :current_locale => Mobility.locale %>
 
   <%= f.hidden_field :image_slideshow_id, :value => @image_slideshow.id  %>
 
@@ -36,7 +38,11 @@
     <%= f.label :body %>
     <%= f.text_area :body, :rows => 5, :class => 'widest wymeditor' -%>
   </div>
-  <% delete_url = @image_slide.id ? refinery.image_slideshows_admin_image_slideshow_image_slide_path(@image_slideshow, @image_slide) : nil %>
+
+  <div class='field'>
+    <%= f.check_box :draft %>
+    <%= f.label :draft, :class => 'stripped' %>
+  </div>
 
   <%= render '/refinery/admin/form_actions', :f => f,
              :continue_editing => false,

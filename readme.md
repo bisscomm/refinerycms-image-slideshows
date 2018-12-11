@@ -1,32 +1,23 @@
 # Refinery CMS Image Slideshows
 
-[![Build Status](https://travis-ci.org/bisscomm/refinerycms-image-slideshows.svg?branch=master)](https://travis-ci.org/bisscomm/refinerycms-image-slideshows) [![Code Climate](https://codeclimate.com/github/bisscomm/refinerycms-image-slideshows/badges/gpa.svg)](https://codeclimate.com/github/bisscomm/refinerycms-image-slideshows) [![Test Coverage](https://codeclimate.com/github/bisscomm/refinerycms-image-slideshows/badges/coverage.svg)](https://codeclimate.com/github/bisscomm/refinerycms-image-slideshows/coverage)
+[![Build Status](https://travis-ci.org/refinerycms-contrib/refinerycms-image-slideshows.svg?branch=master)](https://travis-ci.org/refinerycms-contrib/refinerycms-image-slideshows) [![Code Climate](https://codeclimate.com/github/refinerycms-contrib/refinerycms-image-slideshows/badges/gpa.svg)](https://codeclimate.com/github/refinerycms-contrib/refinerycms-image-slideshows) [![Test Coverage](https://codeclimate.com/github/refinerycms-contrib/refinerycms-image-slideshows/badges/coverage.svg)](https://codeclimate.com/github/refinerycms-contrib/refinerycms-image-slideshows/coverage)
 
-Image Slideshows engine for [Refinery CMS](http://refinerycms.com) allows you to display multiple slideshows.
-
-
-![Refinery Image Slideshows](https://dl.dropbox.com/u/80562357/Upload/gem_refinerycms_image_slideshows.png)
-
-![Refinery Image Slideshows](https://dl.dropbox.com/u/80562357/Upload/gem_refinerycms_image_slideshows_2.png)
-
+Image Slideshows engine for [Refinery CMS](https://www.refinerycms.com) allows you to display multiple slideshows.
 
 ### In summary you can:
-* Manage slideshows (title, height, width, js config)
-* Manage i18n slides in every slideshow (title, image, caption, body, link_url)
+* Manage slideshows (title, draft)
+* Manage i18n slides in every slideshow (title, image, caption, body, link_url, draft)
 
 ## Requirements
 
-This version of `refinerycms-image_slideshows` supports Refinery 3.x and Rails 4.1+.
-To use Rails 3.x / Refinery 2.0.x use the [refinerycms-image_slideshows "Refinery CMS 2-0 stable branch"](https://github.com/bisscomm/refinerycms-image-slideshows/tree/2-0-stable).
-
-* [Refinery CMS](http://refinerycms.com) version 3.0.0 or above.
+* [Refinery CMS](https://www.refinerycms.com) version 4.0.0 or above.
 
 ## Install
 
 Open up your ``Gemfile`` and add at the bottom this line:
 
 ```ruby
-gem 'refinerycms-image_slideshows', github: 'bisscomm/refinerycms-image-slideshows', branch: 'master'
+gem 'refinerycms-image_slideshows', git: 'https://github.com/refinerycms-contrib/refinerycms-image-slideshows', branch: 'master'
 ```
 
 Now, run ``bundle install``
@@ -49,7 +40,7 @@ Add this code in your HTML) :
 
 ```html+erb
   <body>
-    <% main_slideshow = Refinery::ImageSlideshows::ImageSlideshow.includes(:image_slides).find_by_title('Your Awesome Slideshow Title') %>
+    <% main_slideshow = Refinery::ImageSlideshows::ImageSlideshow.slideshow_by_title('Your Awesome Slideshow Title') %>
     <div id="wrapper">
       <div class="slider-wrapper">
         <div id="slider">
@@ -61,14 +52,6 @@ Add this code in your HTML) :
         </div>
       </div>
     </div>
-
-    <script type="text/javascript">
-      $(window).load(function() {
-          $('#slider').nivoSlider({
-            <%= raw main_slideshow.js_config %>
-          });
-      });
-    </script>
   </body>
 ```
 
@@ -92,6 +75,5 @@ Or just with rake spec
 
 
 ## More Information
-* Check out our [Website](http://refinerycms.com/)
+* Check out our [Website](https://www.refinerycms.com/)
 * Documentation is available in the [guides](http://refinerycms.com/guides)
-* Questions can be asked on our [Google Group](http://group.refinerycms.org)

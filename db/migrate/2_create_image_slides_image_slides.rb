@@ -1,4 +1,5 @@
-class CreateImageSlidesImageSlides < ActiveRecord::Migration
+# frozen_string_literal: true
+class CreateImageSlidesImageSlides < ActiveRecord::Migration[5.1]
 
   def up
     create_table :refinery_image_slides do |t|

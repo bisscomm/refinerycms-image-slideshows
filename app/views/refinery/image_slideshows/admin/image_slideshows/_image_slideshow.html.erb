@@ -1,18 +1,27 @@
+<%
+  # setup params for various action links
+  manage_url = refinery.image_slideshows_admin_image_slideshow_image_slides_path(image_slideshow)
+  edit_url = refinery.edit_image_slideshows_admin_image_slideshow_path(image_slideshow)
+  delete_url = refinery.image_slideshows_admin_image_slideshow_path(image_slideshow)
+  delete_options = {
+      class: "cancel confirm-delete",
+      data: {confirm: t('message',  scope: 'refinery.admin.delete', title: image_slideshow.title)}
+  }
+%>
 <li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(image_slideshow) -%>">
   <span class='title'>
     <%= link_to refinery.image_slideshows_admin_image_slideshow_image_slides_path(image_slideshow) do %>
       <%= image_slideshow.title %>
     <% end %>
   </span>
+
+  <%= content_tag :span, class: 'label notice' do
+    ::I18n.t('draft', :scope => 'refinery.image_slideshows.admin.image_slideshows.records')
+  end if image_slideshow.draft?  %>
+
   <span class='actions'>
-    <%= link_to refinery_icon_tag("img.png"), refinery.image_slideshows_admin_image_slideshow_image_slides_path(image_slideshow),
-         :title => t('.manage_image_slides') %>
-    <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_image_slideshows_admin_image_slideshow_path(image_slideshow),
-         :title => t('.edit') %>
-    <%= link_to refinery_icon_tag("delete.png"), refinery.image_slideshows_admin_image_slideshow_path(image_slideshow),
-        :class => "cancel confirm-delete",
-        :title => t('.delete'),
-        :confirm => t('message', :scope => 'refinery.admin.delete', :title => image_slideshow.title),
-        :method => :delete %>
+    <%= action_icon(:switch_view_list,  manage_url,  t('.manage_image_slides') ) %>
+    <%= action_icon(:edit,    edit_url ,  t('.edit') ) %>
+    <%= action_icon(:delete,  delete_url, t('.delete'), delete_options ) %>
   </span>
 </li>

@@ -1,4 +1,5 @@
-Refinery::Core::Engine.routes.append do
+# frozen_string_literal: true
+Refinery::Core::Engine.routes.draw do
 
   # Admin routes
   namespace :image_slideshows, :path => '' do

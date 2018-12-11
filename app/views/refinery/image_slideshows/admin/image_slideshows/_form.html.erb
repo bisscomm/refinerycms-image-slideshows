@@ -10,18 +10,8 @@
   </div>
 
   <div class='field'>
-    <%= f.label :height %>
-    <%= f.text_field :height %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :width %>
-    <%= f.text_field :width %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :js_config %>
-    <%= f.text_area :js_config, :cols => 80, :rows => 20  %>
+    <%= f.check_box :draft %>
+    <%= f.label :draft, :class => 'stripped' %>
   </div>
 
   <%= render '/refinery/admin/form_actions', :f => f,

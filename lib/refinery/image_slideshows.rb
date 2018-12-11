@@ -1,4 +1,5 @@
 require 'refinerycms-core'
+require 'refinerycms-images'
 require 'acts_as_indexed'
 
 module Refinery
